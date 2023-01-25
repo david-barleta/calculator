@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -12,29 +14,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.calculator {
-  background-color: #AFA88C;
-  border-radius: 1%;
+  background-color: beige;
 }
 
 .display {
-  height: 60px;
-  background-color: #1C1C1E;
-  margin: 15px;
-  border-radius: 1%;
+  height: 85px;
+  width: 300px;
+  background-color: #232323;
   color: #F8F3DF;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  padding-right: 10px;
-  padding-bottom: 7px;
+  padding-right: 15px;
+  padding-bottom: 15px;
   font-size: 24px;
+  font-family: "Major Mono Display";
+  font-weight: bold;
 }
 
 .buttons {
-  margin: 15px;
   display: flex;
 }
 
@@ -44,30 +42,28 @@ body {
 }
 
 .button {
-  height: 50px;
-  width: 50px;
-  background-color: #F8F3DF;
-  border-radius: 5%;
-  border-style: none;
-  margin-bottom: 5px;
-  font-size: 16px;
-  color: #1C1C1E;
-}
-
-.column.one, .column.two, .column.three {
-  margin-right: 5px;
+  height: 75px;
+  width: 75px;
+  background-color: #FFFFFF;
+  border-width: thin;
+  font-size: 22px;
+  font-family: "Major Mono Display";
+  font-weight: bold;
+  color: #232323;
 }
 
 #equal {
-  background-color: #F74738;
-  color: #F8F3DF;
+  background-color: #f87d4f;
 }
 
 #divide, #multiply, #minus, #plus {
-  background-color: #5981BC;
-  color: #F8F3DF;
+  background-color: #9ac9d6;
+}
+
+#clear, #backspace, #change-sign {
+  background-color: #e8e8e8;
 }
 
 #plus {
-  height: 105px;
+  height: 150px;
 }
