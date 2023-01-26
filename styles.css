@@ -66,7 +66,7 @@ body {
   background-color: #f87d4f;
 }
 
-#divide, #multiply, #minus, #plus {
+#division, #multiplication, #subtraction, #addition {
   background-color: #9ac9d6;
 }
 
@@ -74,6 +74,6 @@ body {
   background-color: #e8e8e8;
 }
 
-#plus {
+#addition {
   height: 150px;
 }
