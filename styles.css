@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap');
 
 * {
   box-sizing: border-box;
@@ -22,14 +22,25 @@ body {
   width: 300px;
   background-color: #232323;
   color: #F8F3DF;
+  font-family: "Fragment Mono";
+}
+
+.operator-display {
+  height: 25%;
+  width: 300px;
+  padding-left: 5px;
+  font-size: 22px;
+}
+
+.number-display {
+  height: 75%;
+  width: 300px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  font-size: 24px;
-  font-family: "Major Mono Display";
-  font-weight: bold;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  font-size: 26px;
 }
 
 .buttons {
@@ -47,8 +58,7 @@ body {
   background-color: #FFFFFF;
   border-width: thin;
   font-size: 22px;
-  font-family: "Major Mono Display";
-  font-weight: bold;
+  font-family: "Fragment Mono";
   color: #232323;
 }
 
