@@ -34,8 +34,13 @@ function clear() {
 
 function backspace() {
   if (numberDisplay.textContent !== "0") {
-    let numberDisplayContent = numberDisplay.textContent;
-    numberDisplay.textContent = numberDisplayContent.slice(0, -1);
+    if (numberDisplay.textContent.charAt(1) === "") {
+      numberDisplay.textContent = "0";
+    } else {
+      let numberDisplayContent = numberDisplay.textContent;
+      numberDisplay.textContent = numberDisplayContent.slice(0, -1);
+    }
+    
   }
 }
 
