@@ -8,15 +8,13 @@ const clearButton = document.querySelector("#clear");
 const backspaceButton = document.querySelector("#backspace");
 
 let operand1, operand2, output;
-let operation = "none";
+let currentOperation = "none";
 let displayNextOperand = false; // If the display should clear the current input displayed to display the next operand
 let previousOperandCleared = false;
-let firstOperand = true; // If the input should be stored in the operand1 variable
-let secondOperand = false; // If the input should be stored in the operand2 variable
+let setFirstOperand = true; // If the input should be stored in the operand1 variable
+let setSecondOperand = false; // If the input should be stored in the operand2 variable
 let firstOperandStored = false;
 let secondOperandStored = false;
-
-
 
 function displayDigit() {
   if (numberDisplay.textContent === "0") {
@@ -24,6 +22,7 @@ function displayDigit() {
     numberDisplay.textContent += this.id;
   } else {
     if (displayNextOperand) {
+      console.log("operand cleared");
       numberDisplay.textContent = "";
       numberDisplay.textContent += this.id;
       displayNextOperand = false;
@@ -46,9 +45,13 @@ function addDecimal() {
 function clear() {
   numberDisplay.textContent = "0";
   operatorDisplay.textContent = "";
-  output = operand1 = operand2 = 0;
-  operation = "none";
+  output = operand1 = operand2 = undefined;
+  currentOperation = "none";
+  firstOperandStored = secondOperandStored = false;
+  setFirstOperand = true;
+  setSecondOperand = false;
   displayNextOperand = false;
+  previousOperandCleared = false;
 }
 
 function backspace() {
@@ -67,51 +70,59 @@ function backspace() {
 
 function add() {
   let sum = operand1 + operand2;
+  console.log("added");
   return sum;
 }
 
 function subtract() {
   let difference = operand1 - operand2;
+  console.log("subtracted");
   return difference;
 }
 
 function multiply() {
   let product = operand1 * operand2;
+  console.log("multiplied");
   return product;
 }
 
 function divide() {
   let quotient = operand1 / operand2;
   if (quotient === Infinity) {
+    console.log("divided");
     return "undefined";
   }
+  console.log("divided");
   return quotient;
 }
 
 function operate() {
-  if (operation === "addition") {
+  if (currentOperation === "addition") {
     output = add();
-  } else if (operation === "subtraction") {
+  } else if (currentOperation === "subtraction") {
     output = subtract();
-  } else if (operation === "multiplication") {
+  } else if (currentOperation === "multiplication") {
     output = multiply();
-  } else if (operation === "division") {
+  } else if (currentOperation === "division") {
     output = divide();
   }
+  console.log("operated");
 }
 
 function storeFirstOperand() {
+  console.log("input stored to 1st operand");
   operand1 = +numberDisplay.textContent;
   displayNextOperand = true;
-  firstOperand = false;
-  secondOperand = true;
+  setFirstOperand = false;
+  setSecondOperand = true;
   firstOperandStored = true;
 }
 
 function storeSecondOperand() {
+  console.log("input stored to 2nd operand");
   operand2 = +numberDisplay.textContent;
-  firstOperand = true;
-  secondOperand = false;
+  setFirstOperand = true;
+  setSecondOperand = false;
   secondOperandStored = true;
 }
 
@@ -120,15 +131,18 @@ function displayOutput() {
 }
 
 function reset() {
+  console.log("all variables reset");
   output = operand1 = operand2 = undefined;
-  operation = "none";
+  currentOperation = "none";
   firstOperandStored = secondOperandStored = false;
+  setFirstOperand = true;
+  setSecondOperand = false;
   previousOperandCleared = false;
 }
 
 function equalButtonClicked() {
-  if (operation !== "none") {
-    if (previousOperandCleared === true) {
+  if (currentOperation !== "none") { // Prevents an operation from being done if an operator button has not yet been clicked
+    if (previousOperandCleared === true) { // Prevents an operation from being done if there is no 2nd operand yet
       operatorDisplay.textContent = "=";
       storeSecondOperand();
       operate();
@@ -140,9 +154,39 @@ function equalButtonClicked() {
 }
 
 function operatorButtonClicked() {
-  operation = this.id;
-  operatorDisplay.textContent = this.textContent;
-  storeFirstOperand();
+  if (previousOperandCleared === false) {
+    currentOperation = this.id;
+    console.log("current operation changed to " + currentOperation);
+    operatorDisplay.textContent = this.textContent;
+  }
+  if (setSecondOperand) {
+    if (previousOperandCleared === true) {
+      storeSecondOperand();
+      operate();
+      displayOutput();
+      reset();
+      displayNextOperand = true;
+      currentOperation = this.id;
+      console.log("next operation changed to " + currentOperation);
+      operatorDisplay.textContent = this.textContent;
+    }
+  }
+  if (firstOperandStored === false) {
+    storeFirstOperand();
+  }
+  
+}
+
+function showVariableStatus() {
+  console.log("operand1: " + operand1);
+  console.log("operand2: " + operand2);
+  console.log("output: " + output);
+  console.log("displayNextOperand: " + displayNextOperand);
+  console.log("previousOperandCleared: " + previousOperandCleared);
+  console.log("setFirstOperand: " + setFirstOperand);
+  console.log("setSecondOperand: " + setSecondOperand);
+  console.log("firstOperandStored: " + firstOperandStored);
+  console.log("secondOperandStored: " + secondOperandStored);
 }
 
 numberButtons.forEach(button => {
