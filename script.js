@@ -7,6 +7,7 @@ const equalButton = document.querySelector("#equal");
 const decimalButton = document.querySelector("#decimal");
 const clearButton = document.querySelector("#clear");
 const backspaceButton = document.querySelector("#backspace");
+const changeSignButton = document.querySelector("#change-sign");
 const audio = new Audio("calculator-press.wav");
 
 let operand1, operand2, output;
@@ -74,6 +75,19 @@ function backspace() {
   }
   console.log("displayNextOperand: " + displayNextOperand);
   console.log("previousOperandCleared: " + previousOperandCleared);
+}
+
+function changeSign() {
+  let numberDisplayContent = numberDisplay.textContent;
+  if (numberDisplay.textContent.charAt(0) === "-") {
+    numberDisplayContent = numberDisplay.textContent.slice(1);
+    numberDisplay.textContent = numberDisplayContent;
+  } else {
+    numberDisplayContent = "-" + numberDisplay.textContent;
+    numberDisplay.textContent = numberDisplayContent;
+  }
+  displayNextOperand = false;
+  previousOperandCleared = true;
 }
 
 // Operation functions
@@ -223,4 +237,5 @@ operatorButtons.forEach(button => {
 equalButton.addEventListener('click', equalButtonClicked);
 clearButton.addEventListener('click', clear);
 backspaceButton.addEventListener('click', backspace);
+changeSignButton.addEventListener('click', changeSign);
 decimalButton.addEventListener('click', addDecimal);
