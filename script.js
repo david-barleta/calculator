@@ -21,8 +21,16 @@ let secondOperandStored = false;
 
 function displayDigit() {
   if (numberDisplay.textContent === "0") {
-    numberDisplay.textContent = "";
-    numberDisplay.textContent += this.id;
+    if (displayNextOperand) {
+      console.log("operand cleared");
+      numberDisplay.textContent = "";
+      numberDisplay.textContent += this.id;
+      displayNextOperand = false;
+      previousOperandCleared = true;
+    } else {
+      numberDisplay.textContent = "";
+      numberDisplay.textContent += this.id;
+    }
     // If the number display shows 0 only, remove 0 first before displaying another digit, this prevents one or multiple zeroes to appear before a 
     // non-zero digit
   } else {
