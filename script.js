@@ -1,11 +1,13 @@
 const operatorDisplay = document.querySelector(".operator-display");
 const numberDisplay = document.querySelector(".number-display");
+const allButtons = document.querySelectorAll(".button");
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalButton = document.querySelector("#equal");
 const decimalButton = document.querySelector("#decimal");
 const clearButton = document.querySelector("#clear");
 const backspaceButton = document.querySelector("#backspace");
+const audio = new Audio("calculator-press.wav");
 
 let operand1, operand2, output;
 let currentOperation = "none";
@@ -148,6 +150,11 @@ function reset() {
   previousOperandCleared = false;
 }
 
+function playSound() {
+  audio.currentTime = 0;
+  audio.play();
+}
+
 function equalButtonClicked() {
   if (currentOperation !== "none") { // Prevents an operation from being done if an operator button has not yet been clicked
     if (previousOperandCleared === true) { // Prevents an operation from being done if there is no 2nd operand yet
@@ -200,6 +207,10 @@ function showVariableStatus() {
   console.log("firstOperandStored: " + firstOperandStored);
   console.log("secondOperandStored: " + secondOperandStored);
 }
+
+allButtons.forEach(button => {
+  button.addEventListener('click', playSound);
+})
 
 numberButtons.forEach(button => {
   button.addEventListener('click', displayDigit);
