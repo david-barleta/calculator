@@ -20,8 +20,10 @@ function displayDigit() {
   if (numberDisplay.textContent === "0") {
     numberDisplay.textContent = "";
     numberDisplay.textContent += this.id;
+    // If the number display shows 0 only, remove 0 first before displaying another digit, this prevents one or multiple zeroes to appear before a 
+    // non-zero digit
   } else {
-    if (displayNextOperand) {
+    if (displayNextOperand) { // Removes the previous operand to display the next operand when an operator button is clicked
       console.log("operand cleared");
       numberDisplay.textContent = "";
       numberDisplay.textContent += this.id;
@@ -62,8 +64,14 @@ function backspace() {
       let numberDisplayContent = numberDisplay.textContent;
       numberDisplay.textContent = numberDisplayContent.slice(0, -1);
     }
-    
+    displayNextOperand = false;
+    previousOperandCleared = true;
   }
+  if (operatorDisplay.textContent === "=") {
+    operatorDisplay.textContent = "";
+  }
+  console.log("displayNextOperand: " + displayNextOperand);
+  console.log("previousOperandCleared: " + previousOperandCleared);
 }
 
 // Operation functions
@@ -158,7 +166,7 @@ function operatorButtonClicked() {
     currentOperation = this.id;
     console.log("current operation changed to " + currentOperation);
     operatorDisplay.textContent = this.textContent;
-  }
+  } 
   if (setSecondOperand) {
     if (previousOperandCleared === true) {
       storeSecondOperand();
@@ -174,7 +182,11 @@ function operatorButtonClicked() {
   if (firstOperandStored === false) {
     storeFirstOperand();
   }
-  
+if (previousOperandCleared) {
+  currentOperation = this.id;
+  console.log("current operation changed to " + currentOperation);
+  operatorDisplay.textContent = this.textContent;
+}
 }
 
 function showVariableStatus() {
