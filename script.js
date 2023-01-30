@@ -5,8 +5,8 @@ const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalButton = document.querySelector("#equal");
 const decimalButton = document.querySelector("#decimal");
-const clearButton = document.querySelector("#clear");
-const backspaceButton = document.querySelector("#backspace");
+const clearButton = document.querySelector("#Delete");
+const backspaceButton = document.querySelector("#Backspace");
 const changeSignButton = document.querySelector("#change-sign");
 const audio = new Audio("calculator-press.wav");
 
@@ -248,3 +248,28 @@ clearButton.addEventListener('click', clear);
 backspaceButton.addEventListener('click', backspace);
 changeSignButton.addEventListener('click', changeSign);
 decimalButton.addEventListener('click', addDecimal);
+
+function keyDown(e) {
+  if (e.key === "=" || e.key === "Enter") {
+    equalButton.click();
+  } else if (e.key === "+") {
+    const operatorButton = document.querySelector("#addition");
+    operatorButton.click();
+  } else if (e.key === "-") {
+    const operatorButton = document.querySelector("#subtraction");
+    operatorButton.click();
+  } else if (e.key === "*") {
+    const operatorButton = document.querySelector("#multiplication");
+    operatorButton.click();
+  } else if (e.key === "/") {
+    const operatorButton = document.querySelector("#division");
+    operatorButton.click();
+  } else if (e.key === ".") {
+    decimalButton.click();
+  } else {
+    const keyPressed = document.querySelector(`button[id="${e.key}"]`);
+    keyPressed.click();
+  }
+}
+
+document.addEventListener('keydown', keyDown);
