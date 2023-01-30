@@ -19,6 +19,7 @@ let setSecondOperand = false; // If the input should be stored in the operand2 v
 let firstOperandStored = false;
 let secondOperandStored = false;
 
+
 function displayDigit() {
   if (numberDisplay.textContent === "0") {
     if (displayNextOperand) {

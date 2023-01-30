@@ -18,29 +18,31 @@ body {
 }
 
 .display {
-  height: 85px;
+  height: fit-content;
   width: 300px;
   background-color: #232323;
   color: #F8F3DF;
   font-family: "Fragment Mono";
+  display: flex;
+  flex-direction: column;
 }
 
 .operator-display {
-  height: 25%;
+  height: 25px;
   width: 300px;
   padding-left: 5px;
   font-size: 22px;
 }
 
 .number-display {
-  height: 75%;
+  height: fit-content;
   width: 300px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  padding-right: 10px;
-  padding-bottom: 10px;
+  padding: 10px;
   font-size: 26px;
+  word-break: break-all;
 }
 
 .buttons {
